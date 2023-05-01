@@ -18,12 +18,16 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "i2c.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "oled.h"
+#include "ds18b20.h"
+#include "hcsr04.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,7 +69,14 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	uint8_t x = 0;
+	uint8_t y = 0;
+	double temperatureValue = 0;
+	uint8_t tempratureValueInteger;
+	uint8_t tempratureValueDecimal;
+	double distanceValue = 0;
+	uint8_t distanceValueInteger;
+	uint8_t distanceValueDecimal;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -87,14 +98,102 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
+  MX_I2C1_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-
+	OLED_Init();
+	OLED_Clear();
+	OLED_ShowChinese(x + 32 + 16 * 0, y + 2 * 0, 0);
+	OLED_ShowChinese(x + 32 + 16 * 1, y + 2 * 0, 1);
+	OLED_ShowChinese(x + 32 + 16 * 2, y + 2 * 0, 2);
+	OLED_ShowChinese(x + 32 + 16 * 3, y + 2 * 0, 3);
+	OLED_ShowChinese(x + 24 + 16 * 0, y + 2 * 1, 4);
+	OLED_ShowChinese(x + 24 + 16 * 1, y + 2 * 1, 5);
+	OLED_ShowChinese(x + 24 + 16 * 2, y + 2 * 1, 6);
+	OLED_ShowChinese(x + 24 + 16 * 3, y + 2 * 1, 7);
+	OLED_ShowChinese(x + 24 + 16 * 4, y + 2 * 1, 8);
+	OLED_ShowChinese(x + 16 * 0, y + 2 * 2, 9);
+	OLED_ShowChinese(x + 16 * 1, y + 2 * 2, 10);
+	OLED_ShowChinese(x + 16 * 2, y + 2 * 2, 11);
+	OLED_ShowChinese(x + 16 * 3, y + 2 * 2, 12);
+	OLED_ShowChar(x + 16 * 4 + 8 * 0, y + 2 * 2, ':', 16);
+	OLED_ShowChinese(x + 16 * 0, y + 2 * 3, 9);
+	OLED_ShowChinese(x + 16 * 1, y + 2 * 3, 10);
+	OLED_ShowChinese(x + 16 * 2, y + 2 * 3, 13);
+	OLED_ShowChinese(x + 16 * 3, y + 2 * 3, 14);
+	OLED_ShowChar(x + 16 * 4 + 8 * 0, y + 2 * 3, ':', 16);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		if (HAL_GPIO_ReadPin(HCSR505_IO_GPIO_Port, HCSR505_IO_Pin) == GPIO_PIN_SET)
+		{
+			temperatureValue = DS18B20_GetTemperture();
+			tempratureValueInteger = (int)temperatureValue;
+			tempratureValueDecimal = 10 * (temperatureValue - (int)temperatureValue);
+			OLED_ShowNum(x + 16 * 4 + 8 * 2, y + 2 * 3, tempratureValueInteger, 2, 16);
+			OLED_ShowChar(x + 16 * 4 + 8 * 4, y + 2 * 3, '.', 16);
+			OLED_ShowNum(x + 16 * 4 + 8 * 5, y + 2 * 3, tempratureValueDecimal, 1, 16);
+			OLED_ShowChar(x + 16 * 4 + 8 * 6, y + 2 * 3, 'C', 16);
+		}
+		
+		distanceValue = HCSR04_GetDistance_Single();
+		distanceValueInteger = (int)distanceValue;
+		distanceValueDecimal = 10 * (distanceValue - (int)distanceValue);
+		OLED_ShowNum(x + 16 * 4 + 8 * 2, y + 2 * 2, distanceValueInteger, 2, 16);
+		OLED_ShowChar(x + 16 * 4 + 8 * 4, y + 2 * 2, '.', 16);
+		OLED_ShowNum(x + 16 * 4 + 8 * 5, y + 2 * 2, distanceValueDecimal, 1, 16);
+		OLED_ShowChar(x + 16 * 4 + 8 * 6, y + 2 * 2, 'c', 16);
+		OLED_ShowChar(x + 16 * 4 + 8 * 7, y + 2 * 2, 'm', 16);
+		
+		if (HAL_GPIO_ReadPin(OUT3_GPIO_Port, OUT3_Pin) == GPIO_PIN_SET)
+		{
+			HAL_GPIO_WritePin(MotorDrive1_IN1_GPIO_Port, MotorDrive1_IN1_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(MotorDrive1_IN2_GPIO_Port, MotorDrive1_IN2_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive1_IN3_GPIO_Port, MotorDrive1_IN3_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(MotorDrive1_IN4_GPIO_Port, MotorDrive1_IN4_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive2_IN1_GPIO_Port, MotorDrive2_IN1_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(MotorDrive2_IN2_GPIO_Port, MotorDrive2_IN2_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive2_IN3_GPIO_Port, MotorDrive2_IN3_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(MotorDrive2_IN4_GPIO_Port, MotorDrive2_IN4_Pin, GPIO_PIN_RESET);
+		}
+		else if (HAL_GPIO_ReadPin(OUT1_GPIO_Port, OUT1_Pin) == GPIO_PIN_SET || HAL_GPIO_ReadPin(OUT2_GPIO_Port, OUT2_Pin) == GPIO_PIN_SET)
+		{
+			HAL_GPIO_WritePin(MotorDrive1_IN1_GPIO_Port, MotorDrive1_IN1_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(MotorDrive1_IN2_GPIO_Port, MotorDrive1_IN2_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive1_IN3_GPIO_Port, MotorDrive1_IN3_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(MotorDrive1_IN4_GPIO_Port, MotorDrive1_IN4_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive2_IN1_GPIO_Port, MotorDrive2_IN1_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(MotorDrive2_IN2_GPIO_Port, MotorDrive2_IN2_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive2_IN3_GPIO_Port, MotorDrive2_IN3_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(MotorDrive2_IN4_GPIO_Port, MotorDrive2_IN4_Pin, GPIO_PIN_RESET);
+		}
+		else if (HAL_GPIO_ReadPin(OUT4_GPIO_Port, OUT4_Pin) == GPIO_PIN_SET || HAL_GPIO_ReadPin(OUT5_GPIO_Port, OUT5_Pin) == GPIO_PIN_SET)
+		{
+			HAL_GPIO_WritePin(MotorDrive1_IN1_GPIO_Port, MotorDrive1_IN1_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(MotorDrive1_IN2_GPIO_Port, MotorDrive1_IN2_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive1_IN3_GPIO_Port, MotorDrive1_IN3_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(MotorDrive1_IN4_GPIO_Port, MotorDrive1_IN4_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive2_IN1_GPIO_Port, MotorDrive2_IN1_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(MotorDrive2_IN2_GPIO_Port, MotorDrive2_IN2_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive2_IN3_GPIO_Port, MotorDrive2_IN3_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(MotorDrive2_IN4_GPIO_Port, MotorDrive2_IN4_Pin, GPIO_PIN_RESET);
+		}
+		else
+		{
+			HAL_GPIO_WritePin(MotorDrive1_IN1_GPIO_Port, MotorDrive1_IN1_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive1_IN2_GPIO_Port, MotorDrive1_IN2_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive1_IN3_GPIO_Port, MotorDrive1_IN3_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive1_IN4_GPIO_Port, MotorDrive1_IN4_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive2_IN1_GPIO_Port, MotorDrive2_IN1_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive2_IN2_GPIO_Port, MotorDrive2_IN2_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive2_IN3_GPIO_Port, MotorDrive2_IN3_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(MotorDrive2_IN4_GPIO_Port, MotorDrive2_IN4_Pin, GPIO_PIN_RESET);
+		}
+		
+		HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

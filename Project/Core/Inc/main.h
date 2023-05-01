@@ -57,6 +57,40 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define MotorDrive1_IN1_Pin GPIO_PIN_2
+#define MotorDrive1_IN1_GPIO_Port GPIOA
+#define MotorDrive1_IN2_Pin GPIO_PIN_3
+#define MotorDrive1_IN2_GPIO_Port GPIOA
+#define MotorDrive1_IN3_Pin GPIO_PIN_4
+#define MotorDrive1_IN3_GPIO_Port GPIOA
+#define MotorDrive1_IN4_Pin GPIO_PIN_5
+#define MotorDrive1_IN4_GPIO_Port GPIOA
+#define MotorDrive2_IN1_Pin GPIO_PIN_6
+#define MotorDrive2_IN1_GPIO_Port GPIOA
+#define MotorDrive2_IN2_Pin GPIO_PIN_7
+#define MotorDrive2_IN2_GPIO_Port GPIOA
+#define MotorDrive2_IN3_Pin GPIO_PIN_0
+#define MotorDrive2_IN3_GPIO_Port GPIOB
+#define MotorDrive2_IN4_Pin GPIO_PIN_1
+#define MotorDrive2_IN4_GPIO_Port GPIOB
+#define HCSR505_IO_Pin GPIO_PIN_8
+#define HCSR505_IO_GPIO_Port GPIOA
+#define HCSR04_TRIG_Pin GPIO_PIN_11
+#define HCSR04_TRIG_GPIO_Port GPIOA
+#define HCSR04_ECHO_Pin GPIO_PIN_12
+#define HCSR04_ECHO_GPIO_Port GPIOA
+#define DS18B20_IO_Pin GPIO_PIN_15
+#define DS18B20_IO_GPIO_Port GPIOA
+#define OUT1_Pin GPIO_PIN_3
+#define OUT1_GPIO_Port GPIOB
+#define OUT2_Pin GPIO_PIN_4
+#define OUT2_GPIO_Port GPIOB
+#define OUT3_Pin GPIO_PIN_5
+#define OUT3_GPIO_Port GPIOB
+#define OUT4_Pin GPIO_PIN_6
+#define OUT4_GPIO_Port GPIOB
+#define OUT5_Pin GPIO_PIN_7
+#define OUT5_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
