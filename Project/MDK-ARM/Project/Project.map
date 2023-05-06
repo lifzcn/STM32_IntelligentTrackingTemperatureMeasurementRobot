@@ -117,8 +117,6 @@ Section Cross References
     main.o(.text.main) refers to oled.o(.text.OLED_Clear) for OLED_Clear
     main.o(.text.main) refers to oled.o(.text.OLED_ShowChinese) for OLED_ShowChinese
     main.o(.text.main) refers to oled.o(.text.OLED_ShowChar) for OLED_ShowChar
-    main.o(.text.main) refers to stm32f1xx_hal_gpio.o(.text.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    main.o(.text.main) refers to stm32f1xx_hal.o(.text.HAL_Delay) for HAL_Delay
     main.o(.text.main) refers to stm32f1xx_hal_gpio.o(.text.HAL_GPIO_ReadPin) for HAL_GPIO_ReadPin
     main.o(.text.main) refers to ds18b20.o(.text.DS18B20_GetTemperture) for DS18B20_GetTemperture
     main.o(.text.main) refers to f2d.o(.text) for __aeabi_f2d
@@ -129,6 +127,7 @@ Section Cross References
     main.o(.text.main) refers to dfixi.o(.text) for __aeabi_d2iz
     main.o(.text.main) refers to oled.o(.text.OLED_ShowNum) for OLED_ShowNum
     main.o(.text.main) refers to hcsr04.o(.text.HCSR04_GetDistance_Single) for HCSR04_GetDistance_Single
+    main.o(.text.main) refers to stm32f1xx_hal_gpio.o(.text.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
     main.o(.ARM.exidx.text.main) refers to main.o(.text.main) for [Anonymous Symbol]
     main.o(.text.SystemClock_Config) refers to stm32f1xx_hal_rcc.o(.text.HAL_RCC_OscConfig) for HAL_RCC_OscConfig
     main.o(.text.SystemClock_Config) refers to stm32f1xx_hal_rcc.o(.text.HAL_RCC_ClockConfig) for HAL_RCC_ClockConfig
@@ -2052,11 +2051,11 @@ Image Symbol Table
     [Anonymous Symbol]                       0x08002a70   Section        0  stm32f1xx_it.o(.text.UsageFault_Handler)
     [Anonymous Symbol]                       0x08002a74   Section        0  oled.o(.text.WriteCmd)
     [Anonymous Symbol]                       0x08002cd4   Section        0  main.o(.text.main)
-    i.__scatterload_copy                     0x08002fc0   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x08002fce   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x08002fd0   Section       14  handlers.o(i.__scatterload_zeroinit)
-    .L__const.HAL_RCC_GetSysClockFreq.aPredivFactorTable 0x08002fde   Data           2  stm32f1xx_hal_rcc.o(.rodata..L__const.HAL_RCC_GetSysClockFreq.aPredivFactorTable)
-    .L__const.HAL_RCC_GetSysClockFreq.aPLLMULFactorTable 0x080055e2   Data          16  stm32f1xx_hal_rcc.o(.rodata.cst16)
+    i.__scatterload_copy                     0x080030b8   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x080030c6   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x080030c8   Section       14  handlers.o(i.__scatterload_zeroinit)
+    .L__const.HAL_RCC_GetSysClockFreq.aPredivFactorTable 0x080030d6   Data           2  stm32f1xx_hal_rcc.o(.rodata..L__const.HAL_RCC_GetSysClockFreq.aPredivFactorTable)
+    .L__const.HAL_RCC_GetSysClockFreq.aPLLMULFactorTable 0x080056da   Data          16  stm32f1xx_hal_rcc.o(.rodata.cst16)
     .L_MergedGlobals                         0x20000000   Data           8  stm32f1xx_hal.o(.data..L_MergedGlobals)
     [Anonymous Symbol]                       0x20000000   Section        0  stm32f1xx_hal.o(.data..L_MergedGlobals)
     STACK                                    0x20000110   Section     1024  startup_stm32f103xb.o(STACK)
@@ -2205,17 +2204,17 @@ Image Symbol Table
     SystemInit                               0x08002a6d   Thumb Code     2  system_stm32f1xx.o(.text.SystemInit)
     UsageFault_Handler                       0x08002a71   Thumb Code     2  stm32f1xx_it.o(.text.UsageFault_Handler)
     WriteCmd                                 0x08002a75   Thumb Code   606  oled.o(.text.WriteCmd)
-    main                                     0x08002cd5   Thumb Code   748  main.o(.text.main)
-    __scatterload_copy                       0x08002fc1   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x08002fcf   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x08002fd1   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    AHBPrescTable                            0x08002fe0   Data          16  system_stm32f1xx.o(.rodata.AHBPrescTable)
-    APBPrescTable                            0x08002ff0   Data           8  system_stm32f1xx.o(.rodata.APBPrescTable)
-    F6x8                                     0x08002ff8   Data         552  oled.o(.rodata.F6x8)
-    F8X16                                    0x08003220   Data        1504  oled.o(.rodata.F8X16)
-    Hzk                                      0x08003800   Data        7650  oled.o(.rodata.Hzk)
-    Region$$Table$$Base                      0x080055f4   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08005614   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x08002cd5   Thumb Code   996  main.o(.text.main)
+    __scatterload_copy                       0x080030b9   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x080030c7   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x080030c9   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    AHBPrescTable                            0x080030d8   Data          16  system_stm32f1xx.o(.rodata.AHBPrescTable)
+    APBPrescTable                            0x080030e8   Data           8  system_stm32f1xx.o(.rodata.APBPrescTable)
+    F6x8                                     0x080030f0   Data         552  oled.o(.rodata.F6x8)
+    F8X16                                    0x08003318   Data        1504  oled.o(.rodata.F8X16)
+    Hzk                                      0x080038f8   Data        7650  oled.o(.rodata.Hzk)
+    Region$$Table$$Base                      0x080056ec   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0800570c   Number         0  anon$$obj.o(Region$$Table)
     uwTickFreq                               0x20000000   Data           1  stm32f1xx_hal.o(.data..L_MergedGlobals)
     uwTickPrio                               0x20000004   Data           4  stm32f1xx_hal.o(.data..L_MergedGlobals)
     CMD_Data                                 0x20000008   Data          27  oled.o(.data.CMD_Data)
@@ -2234,9 +2233,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00005640, Max: 0x00010000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00005738, Max: 0x00010000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00005614, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x0000570c, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2360,34 +2359,34 @@ Memory Map of the image
     0x08002a72   0x08002a72   0x00000002   PAD
     0x08002a74   0x08002a74   0x0000025e   Code   RO           39    .text.WriteCmd      oled.o
     0x08002cd2   0x08002cd2   0x00000002   PAD
-    0x08002cd4   0x08002cd4   0x000002ec   Code   RO           79    .text.main          main.o
-    0x08002fc0   0x08002fc0   0x0000000e   Code   RO         1187    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x08002fce   0x08002fce   0x00000002   Code   RO         1188    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08002fd0   0x08002fd0   0x0000000e   Code   RO         1189    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x08002fde   0x08002fde   0x00000002   Data   RO          437    .rodata..L__const.HAL_RCC_GetSysClockFreq.aPredivFactorTable  stm32f1xx_hal_rcc.o
-    0x08002fe0   0x08002fe0   0x00000010   Data   RO         1122    .rodata.AHBPrescTable  system_stm32f1xx.o
-    0x08002ff0   0x08002ff0   0x00000008   Data   RO         1123    .rodata.APBPrescTable  system_stm32f1xx.o
-    0x08002ff8   0x08002ff8   0x00000228   Data   RO           67    .rodata.F6x8        oled.o
-    0x08003220   0x08003220   0x000005e0   Data   RO           68    .rodata.F8X16       oled.o
-    0x08003800   0x08003800   0x00001de2   Data   RO           69    .rodata.Hzk         oled.o
-    0x080055e2   0x080055e2   0x00000010   Data   RO          436    .rodata.cst16       stm32f1xx_hal_rcc.o
-    0x080055f2   0x080055f2   0x00000002   PAD
-    0x080055f4   0x080055f4   0x00000020   Data   RO         1186    Region$$Table       anon$$obj.o
+    0x08002cd4   0x08002cd4   0x000003e4   Code   RO           79    .text.main          main.o
+    0x080030b8   0x080030b8   0x0000000e   Code   RO         1187    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x080030c6   0x080030c6   0x00000002   Code   RO         1188    i.__scatterload_null  mc_w.l(handlers.o)
+    0x080030c8   0x080030c8   0x0000000e   Code   RO         1189    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x080030d6   0x080030d6   0x00000002   Data   RO          437    .rodata..L__const.HAL_RCC_GetSysClockFreq.aPredivFactorTable  stm32f1xx_hal_rcc.o
+    0x080030d8   0x080030d8   0x00000010   Data   RO         1122    .rodata.AHBPrescTable  system_stm32f1xx.o
+    0x080030e8   0x080030e8   0x00000008   Data   RO         1123    .rodata.APBPrescTable  system_stm32f1xx.o
+    0x080030f0   0x080030f0   0x00000228   Data   RO           67    .rodata.F6x8        oled.o
+    0x08003318   0x08003318   0x000005e0   Data   RO           68    .rodata.F8X16       oled.o
+    0x080038f8   0x080038f8   0x00001de2   Data   RO           69    .rodata.Hzk         oled.o
+    0x080056da   0x080056da   0x00000010   Data   RO          436    .rodata.cst16       stm32f1xx_hal_rcc.o
+    0x080056ea   0x080056ea   0x00000002   PAD
+    0x080056ec   0x080056ec   0x00000020   Data   RO         1186    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08005618, Size: 0x00000510, Max: 0x00005000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08005710, Size: 0x00000510, Max: 0x00005000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08005618   0x00000008   Data   RW          399    .data..L_MergedGlobals  stm32f1xx_hal.o
-    0x20000008   0x08005620   0x0000001b   Data   RW           70    .data.CMD_Data      oled.o
-    0x20000023   0x0800563b   0x00000001   PAD
-    0x20000024   0x0800563c   0x00000004   Data   RW         1121    .data.SystemCoreClock  system_stm32f1xx.o
+    0x20000000   0x08005710   0x00000008   Data   RW          399    .data..L_MergedGlobals  stm32f1xx_hal.o
+    0x20000008   0x08005718   0x0000001b   Data   RW           70    .data.CMD_Data      oled.o
+    0x20000023   0x08005733   0x00000001   PAD
+    0x20000024   0x08005734   0x00000004   Data   RW         1121    .data.SystemCoreClock  system_stm32f1xx.o
     0x20000028        -       0x00000054   Zero   RW          109    .bss.hi2c1          i2c.o
     0x2000007c        -       0x00000048   Zero   RW          126    .bss.htim1          tim.o
     0x200000c4        -       0x00000044   Zero   RW          141    .bss.huart1         usart.o
     0x20000108        -       0x00000004   Zero   RW          398    .bss.uwTick         stm32f1xx_hal.o
-    0x2000010c   0x08005640   0x00000004   PAD
+    0x2000010c   0x08005738   0x00000004   PAD
     0x20000110        -       0x00000400   Zero   RW            1    STACK               startup_stm32f103xb.o
 
 
@@ -2402,7 +2401,7 @@ Image component sizes
        248          0          0          0          0       1680   gpio.o
        122          0          0          0          0       5004   hcsr04.o
        188          0          0          0         84       4778   i2c.o
-       758          0          0          0          0       2974   main.o
+      1006          0          0          0          0       3195   main.o
       2358          0       9706         27          0      10113   oled.o
         36          8        236          0       1024        832   startup_stm32f103xb.o
        188          0          0          8          4       5802   stm32f1xx_hal.o
@@ -2420,7 +2419,7 @@ Image component sizes
        182          0          0          0         68       4267   usart.o
 
     ----------------------------------------------------------------------
-     10488         30      10018         40       1256     221800   Object Totals
+     10736         30      10018         40       1256     222021   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         74          0          2          1          4          0   (incl. Padding)
 
@@ -2475,15 +2474,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     12018         46      10018         40       1256     222384   Grand Totals
-     12018         46      10018         40       1256     222384   ELF Image Totals
-     12018         46      10018         40          0          0   ROM Totals
+     12266         46      10018         40       1256     222605   Grand Totals
+     12266         46      10018         40       1256     222605   ELF Image Totals
+     12266         46      10018         40          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                22036 (  21.52kB)
+    Total RO  Size (Code + RO Data)                22284 (  21.76kB)
     Total RW  Size (RW Data + ZI Data)              1296 (   1.27kB)
-    Total ROM Size (Code + RO Data + RW Data)      22076 (  21.56kB)
+    Total ROM Size (Code + RO Data + RW Data)      22324 (  21.80kB)
 
 ==============================================================================
 
